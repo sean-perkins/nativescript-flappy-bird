@@ -1,0 +1,6 @@
+.bird {
+    background-image: url('res://bird');
+    background-repeat: no-repeat;
+    width: 34;
+    height: 24;
+}

@@ -1,0 +1,8 @@
+.land {
+    background-image: url('res://land');
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    background-size:contain;
+    background-color: #ded895;
+    height: 140;
+}

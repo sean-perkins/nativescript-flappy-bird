@@ -1,0 +1,11 @@
+<GridLayout rows="*, auto, auto" class="canvas">
+    <ceiling-object [ceiling]="ceiling"></ceiling-object>
+    <sky-object [sky]="sky"></sky-object>
+    <land-object [land]="land"></land-object>
+    <splash-instruction></splash-instruction>
+    <bird-player [bird]="bird"></bird-player>
+    <splash-scoreboard *ngIf="dead"
+        (onReplay)="restart()"></splash-scoreboard>
+    <AbsoluteLayout
+        (tap)="screenPress()" width="100%" height="100%" rowSpan="3" *ngIf="!dead"></AbsoluteLayout>
+</GridLayout>

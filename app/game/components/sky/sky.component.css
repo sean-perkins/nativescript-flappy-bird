@@ -1,0 +1,6 @@
+.sky {
+    background-image: url('res://sky');
+    background-repeat: repeat-x;
+    background-size:contain;
+    height: 105;
+}

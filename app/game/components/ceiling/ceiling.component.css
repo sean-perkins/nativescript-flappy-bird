@@ -1,0 +1,8 @@
+.ceiling {
+    background-image: url('res://ceiling');
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: 0 0;
+    height: 20;
+    margin-top: 10;
+}
