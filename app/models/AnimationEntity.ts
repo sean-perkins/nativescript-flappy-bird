@@ -11,13 +11,19 @@ export abstract class AnimationEntity {
      */
     private animationInterval: any;
     /**
+     * Determines if the entity is animating
+     */
+    animating: boolean;
+    /**
      * The position offset of the model (used for animations)
      */
     position: number;
     /**
      * Abstract implementations of the animation sequence for a model
      */
-    abstract animate(): void;
+    animate() {
+        this.animating = true;
+    }
     /**
      * Starts an underlying animation for a model
      * @param animationFn The animation sequence to run
@@ -25,11 +31,15 @@ export abstract class AnimationEntity {
     protected startAnimation(animationFn: Function): void {
         this.animationInterval = setInterval(animationFn, this.animationDelay);
     }
+
+
+
     /**
      * Stops the animation for the model
      */
     stopAnimation(): void {
         clearInterval(this.animationInterval);
+        this.animating = false;
     }
 
 }

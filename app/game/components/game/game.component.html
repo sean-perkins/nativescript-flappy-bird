@@ -1,7 +1,7 @@
 <GridLayout rows="*, auto, auto" class="canvas">
-    <ceiling-object [ceiling]="ceiling"></ceiling-object>
-    <sky-object [sky]="sky"></sky-object>
-    <land-object [land]="land"></land-object>
+    <ceiling-object [animating]="!dead"></ceiling-object>
+    <sky-object [animating]="!dead"></sky-object>
+    <land-object [animating]="!dead"></land-object>
     <splash-instruction></splash-instruction>
     <bird-player [bird]="bird"></bird-player>
     <splash-scoreboard *ngIf="dead"

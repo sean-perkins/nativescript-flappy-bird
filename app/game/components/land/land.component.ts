@@ -1,6 +1,7 @@
-import { Land } from './../../../models/Land';
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Input, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { Label } from 'tns-core-modules/ui/label';
 
 @Component({
     selector: 'land-object',
@@ -8,14 +9,17 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './land.component.html',
     styleUrls: ['./land.component.css']
 })
-export class LandComponent implements OnInit {
+export class LandComponent {
 
-    @Input() land: Land;
-
+    @Input() animating: boolean;
     @Input() row = 2;
 
-    ngOnInit() {
-        this.land.animate();
+    @ViewChild('land') landEl: ElementRef;;
+
+    get position(): number {
+        const land: Label = this.landEl.nativeElement;
+        return land.getLocationOnScreen().y;
     }
+
 
 }

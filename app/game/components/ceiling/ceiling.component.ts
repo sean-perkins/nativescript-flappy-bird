@@ -1,6 +1,5 @@
-import { Ceiling } from './../../../models/Ceiling';
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Input, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'ceiling-object',
@@ -8,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './ceiling.component.html',
     styleUrls: ['./ceiling.component.css']
 })
-export class CeilingComponent implements OnInit {
+export class CeilingComponent {
 
-    @Input() ceiling: Ceiling;
+    @Input() animating: boolean;
+    @Input() row = 0;
 
-    ngOnInit() {
-        this.ceiling.animate();
+    @ViewChild('ceilingEl') ceilingEl: ElementRef;
+
+    get maxHeight(): number {
+        return this.ceilingEl.nativeElement.getLocationOnScreen().y;
     }
-
 
 }

@@ -1,9 +1,11 @@
 import { SplashInstructionComponent } from '../splash-instruction/splash-instruction.component';
+import { LandComponent } from '../land/land.component';
+import { BirdComponent } from '../bird/bird.component';
+import { CeilingComponent } from '../ceiling/ceiling.component';
 import { OnDestroy, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 
-import { Bird, Ceiling, Land, Sky } from '../../../models/index';
-import { GameEngine } from '../../../models/GameEngine';
+import { Bird, GameEngine } from '../../../models/index';
 
 @Component({
     selector: 'ns-game',
@@ -14,6 +16,10 @@ import { GameEngine } from '../../../models/GameEngine';
 export class GameComponent implements OnDestroy {
     // Splash instruction component referenced, accesed for animating dismiss
     @ViewChild(SplashInstructionComponent) splashInstruction: SplashInstructionComponent;
+    @ViewChild(LandComponent) landEl: LandComponent;
+    @ViewChild(BirdComponent) birdEl: BirdComponent;
+    @ViewChild(CeilingComponent) ceilingEl: CeilingComponent;
+
     // Determines if the game has started
     hasStarted = false;
     // The death state of the player
@@ -21,9 +27,6 @@ export class GameComponent implements OnDestroy {
 
     constructor(
         public bird: Bird,
-        public ceiling: Ceiling,
-        public land: Land,
-        public sky: Sky,
         private engine: GameEngine) { }
 
     /**
@@ -45,7 +48,9 @@ export class GameComponent implements OnDestroy {
         }
         // Handle the jump if the user has not died
         if (!this.dead) {
-            this.bird.jump();
+            if (!this.bird.hasCrashed(this.birdEl.currentPosition, this.landEl.position)) {
+                this.bird.jump();
+            }
         }
     }
 
@@ -56,9 +61,6 @@ export class GameComponent implements OnDestroy {
         this.dead = false;
         this.bird.reset();
         this.bird.animate();
-        this.land.animate();
-        this.sky.animate();
-        this.ceiling.animate();
         this.startGame();
     }
 
@@ -72,10 +74,10 @@ export class GameComponent implements OnDestroy {
             this.bird.velocity += GameEngine.GRAVITY;
             this.bird.position += this.bird.velocity;
             this.bird.rotation = Math.min((this.bird.velocity / 10) * 90, 90);
-            if (this.bird.hasCrashed) {
+            if (this.bird.hasCrashed(this.birdEl.currentPosition, this.landEl.position)) {
                 this.endGame();
             }
-            this.bird.checkAltitude();
+            this.bird.checkAltitude(this.birdEl.currentPosition, this.ceilingEl.maxHeight);
             // TODO handle drawing pipes
         });
     }
@@ -97,9 +99,6 @@ export class GameComponent implements OnDestroy {
      */
     private stopAnimations(): void {
         this.bird.stopAnimation();
-        this.ceiling.stopAnimation();
-        this.land.stopAnimation();
-        this.sky.stopAnimation();
     }
 
 }

@@ -1,8 +1,35 @@
 .land {
+    transform: translateX(0);
+    width: 100%;
+    background-color: #ded895;
+    height: 140;
+    width: 100%;
     background-image: url('res://land');
     background-repeat: repeat-x;
     background-position: 0 0;
     background-size:contain;
-    background-color: #ded895;
+}
+.land-img {
     height: 140;
+    background-image: url('res://land');
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    background-size:contain;
+    width: 1000;
+}
+
+.land-img.animate {
+    animation-name: bg-slide;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes bg-slide {
+    from {
+        transform: translateX(0)
+    }
+    to {
+        transform: translateX(-300);
+    }
 }

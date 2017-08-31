@@ -1,8 +1,29 @@
 .ceiling {
+    height: 20;
+    margin-top: 10;
+}
+
+.ceiling-img {
+    height: 20;
     background-image: url('res://ceiling');
     background-repeat: repeat-x;
     background-size: contain;
     background-position: 0 0;
-    height: 20;
-    margin-top: 10;
+    width: 1000;
+}
+
+.ceiling-img.animate {
+    animation-name: ceiling-anim;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes ceiling-anim {
+    from {
+        transform: translateX(0)
+    }
+    to {
+        transform: translateX(-300);
+    }
 }

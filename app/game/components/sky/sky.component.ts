@@ -1,6 +1,5 @@
-import { Sky } from './../../../models/Sky';
 import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'sky-object',
@@ -8,14 +7,10 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './sky.component.html',
     styleUrls: ['./sky.component.css']
 })
-export class SkyComponent implements OnInit {
+export class SkyComponent {
 
-    @Input() sky: Sky;
+    @Input() animating: boolean;
 
     @Input() row = 1;
-
-    ngOnInit() {
-        this.sky.animate();
-    }
 
 }

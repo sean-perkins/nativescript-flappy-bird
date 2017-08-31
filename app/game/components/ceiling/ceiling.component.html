@@ -1,2 +1,4 @@
-<StackLayout class="ceiling" verticalAlignment="top"
-    [style]="ceiling.styles"></StackLayout>
+<AbsoluteLayout [row]="row" class="ceiling" verticalAlignment="top">
+    <Label class="ceiling-img" #ceilingEl
+        [class.animate]="animating"></Label>
+</AbsoluteLayout>

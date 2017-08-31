@@ -53,31 +53,30 @@ export class Bird extends AnimationEntity {
      */
     jump(): void {
         // Only flap and play audio if the user has not crashed
-        if (!this.hasCrashed) {
-            this.velocity = this.jumpVelocity;
-            this.rotation = Math.min((this.velocity / 10) * 90, 90);
-            this.wingFlapAudio.initFromFile({
-                audioFile: '~/audio/sfx_wing.mp3',
-                loop: false
-            });
-            this.wingFlapAudio.play();
-        }
+        this.velocity = this.jumpVelocity;
+        this.rotation = Math.min((this.velocity / 10) * 90, 90);
+        this.wingFlapAudio.initFromFile({
+            audioFile: '~/audio/sfx_wing.mp3',
+            loop: false
+        });
+        this.wingFlapAudio.play();
     }
 
     /**
      * Check altitude to prevent user from clipping past the ceiling barrier
      */
-    checkAltitude(): void {
-        if (this.position < -45) {
-            this.position = -45;
+    checkAltitude(currentPosition: number, maxHeight: number): void {
+        const boundHeight = currentPosition - 22;
+        if (boundHeight < maxHeight) {
+            this.position = currentPosition - 80;
         }
     }
 
     /**
      * Checks if the bird has crashed, offsets rotation to solve UI problem
      */
-    get hasCrashed(): boolean {
-        const crashed = this.position > 410;
+    hasCrashed(currentPosition: number, minHeight: number): boolean {
+        const crashed = (currentPosition + 45) >= minHeight;
         if (crashed) {
             this.rotation = 70;
         }
@@ -89,7 +88,7 @@ export class Bird extends AnimationEntity {
      */
     get styles(): string {
         return `
-        background-position: 0 ${isAndroid ? 0 : this.positionOffset};
+        background-position: 0 ${this.positionOffset};
         rotate: ${this.rotation};`;
     }
 

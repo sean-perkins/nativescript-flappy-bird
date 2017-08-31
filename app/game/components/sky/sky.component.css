@@ -4,3 +4,27 @@
     background-size:contain;
     height: 105;
 }
+
+.sky-img {
+    background-image: url('res://sky');
+    background-repeat: repeat-x;
+    background-size:contain;
+    height: 105;
+    width: 1000;
+}
+
+.sky-img.animate {
+    animation-name: sky-anim;
+    animation-duration: 19s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes sky-anim {
+    from {
+        transform: translateX(-400)
+    }
+    to {
+        transform: translateX(0);
+    }
+}
